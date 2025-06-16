@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from rest_framework.exceptions import ValidationError
+
+from records_management.validators import validate_cash_flow
 
 
 class RecordType(models.Model):
@@ -175,17 +176,12 @@ class CashFlowStatement(models.Model):
             "price",
         ]
 
+    def clean(self):
+        validate_cash_flow(self)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.status} {self.type} {self.price}"
-
-    def clean(self):
-        """Ограничивает выбор подкатегории для категории и выбор категории для типа"""
-        if self.subcategory and self.subcategory.category != self.category:
-            raise ValidationError(
-                f"Подкатегория {self.subcategory} не относится к категории {self.category}"
-            )
-
-        if self.category and self.category.type != self.type:
-            raise ValidationError(
-                f"Категория {self.category} не относится к типу {self.type}"
-            )

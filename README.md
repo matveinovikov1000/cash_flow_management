@@ -4,18 +4,9 @@
 Скопируйте репозиторий https://github.com/matveinovikov1000/cash_flow_management/tree/feature
 
 
-Для корректного запуска проекта установите зависимости 
-(список зависимостей указан в pyproject.toml):
+Для корректного запуска проекта установите зависимости из pyproject.toml:
 
-- poetry add django
-- poetry add djangorestframework
-- poetry add python-dotenv
-- poetry add psycopg2-binary
-- poetry add django-filter
-
-При использовании pip install для установки, зависимости необходимо сохранить в файле 
-requirements.txt в корне проекта
-
+```command poetry install``` 
 
 Для настройки необходимо добавить в корне проекта файл .env, в котором указать
 (пример в .env.example)(в проекте используется PostgreSQL):
@@ -29,13 +20,13 @@ requirements.txt в корне проекта
 
 
 Для запуска приложения необходимо:
-- запустить миграции
-    - python manage.py makemigrations
-    - python manage.py migrate
-- создать суперюзера для доступа в админку
-    - python manage.py createsuperuser
-- запустить приложение на локальном сервере
-    - python manage.py runserver
+- запустить миграции:
+  ```command python manage.py makemigrations```
+  ```command python manage.py migrate```
+- создать суперюзера для доступа в админку:
+  ```command python manage.py createsuperuser```
+- запустить приложение на локальном сервере:
+  ```command python manage.py runserver```
 
 Админка доступна тут http://127.0.0.1:8000/admin/
 (для входа необходмо указать username и password суперюзера)
